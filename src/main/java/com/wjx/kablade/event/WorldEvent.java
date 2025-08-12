@@ -910,6 +910,9 @@ public class WorldEvent {
         }
     }
 
+    final static RenderWindEnchantment rendererWE = new RenderWindEnchantment(null);
+    final static RenderConfinementForceField rendererCFF = new RenderConfinementForceField(null);
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onPlayerRender(RenderWorldLastEvent event) {
@@ -954,7 +957,7 @@ public class WorldEvent {
                         }
                         //RenderWindEnchantment
                         if (e1 instanceof EntityWindEnchantment){
-                            RenderWindEnchantment renderer = new RenderWindEnchantment(null);
+
                             float f = (float)(e1.prevPosX + (e1.posX - e1.prevPosX) * event.getPartialTicks());
                             float f1 = (float)(e1.prevPosY + (e1.posY - e1.prevPosY) * event.getPartialTicks());
                             float f2 = (float)(e1.prevPosZ + (e1.posZ - e1.prevPosZ) * event.getPartialTicks());
@@ -962,11 +965,11 @@ public class WorldEvent {
                             float f3 = ( float)(Minecraft.getMinecraft().player.prevPosX+(Minecraft.getMinecraft().player.posX-Minecraft.getMinecraft().player.prevPosX)*event.getPartialTicks());
                             float f4 = ( float)(Minecraft.getMinecraft().player.prevPosY+(Minecraft.getMinecraft().player.posY-Minecraft.getMinecraft().player.prevPosY)*event.getPartialTicks());
                             float f5 = ( float)(Minecraft.getMinecraft().player.prevPosZ+(Minecraft.getMinecraft().player.posZ-Minecraft.getMinecraft().player.prevPosZ)*event.getPartialTicks());
-                            renderer.doRender2((EntityWindEnchantment) e1, f - f3, f1 - f4, f2 - f5, 0, event.getPartialTicks());
+                            rendererWE.doRender2((EntityWindEnchantment) e1, f - f3, f1 - f4, f2 - f5, 0, event.getPartialTicks());
                         }
 
                         if(e1 instanceof EntityConfinementForceField){
-                            RenderConfinementForceField renderer = new RenderConfinementForceField(null);
+
                             float f = (float)(e1.prevPosX + (e1.posX - e1.prevPosX) * event.getPartialTicks());
                             float f1 = (float)(e1.prevPosY + (e1.posY - e1.prevPosY) * event.getPartialTicks());
                             float f2 = (float)(e1.prevPosZ + (e1.posZ - e1.prevPosZ) * event.getPartialTicks());
@@ -974,7 +977,12 @@ public class WorldEvent {
                             float f3 = ( float)(Minecraft.getMinecraft().player.prevPosX+(Minecraft.getMinecraft().player.posX-Minecraft.getMinecraft().player.prevPosX)*event.getPartialTicks());
                             float f4 = ( float)(Minecraft.getMinecraft().player.prevPosY+(Minecraft.getMinecraft().player.posY-Minecraft.getMinecraft().player.prevPosY)*event.getPartialTicks());
                             float f5 = ( float)(Minecraft.getMinecraft().player.prevPosZ+(Minecraft.getMinecraft().player.posZ-Minecraft.getMinecraft().player.prevPosZ)*event.getPartialTicks());
-                            renderer.doRender2((EntityConfinementForceField) e1, f - f3, f1 - f4, f2 - f5, 0, event.getPartialTicks());
+                            rendererCFF.doRender2((EntityConfinementForceField) e1, f - f3, f1 - f4, f2 - f5, 0, event.getPartialTicks());
+                        }
+
+                        //RenderFreezeDomainEx
+                        if (e1 instanceof EntityFreezeDomainEx){
+
                         }
                     }
                 }
