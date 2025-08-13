@@ -1,14 +1,6 @@
 package com.wjx.kablade.Entity.Render;
 
 import com.wjx.kablade.Entity.EntityConceptual;
-import com.wjx.kablade.Entity.EntityThunderEdgeAttack;
-import com.wjx.kablade.Entity.EntityTuna;
-import com.wjx.kablade.util.Vec3f;
-import com.wjx.kablade.util.renderingQueue.Actions.ActionBase;
-import com.wjx.kablade.util.renderingQueue.RenderModel;
-import com.wjx.kablade.util.renderingQueue.RenderObj;
-import com.wjx.kablade.util.renderingQueue.RenderQueue;
-import mods.flammpfeil.slashblade.client.model.obj.Face;
 import mods.flammpfeil.slashblade.client.model.obj.WavefrontObject;
 import mods.flammpfeil.slashblade.util.ResourceLocationRaw;
 import net.minecraft.client.Minecraft;
@@ -25,16 +17,13 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_LIGHTING;
+import static org.lwjgl.opengl.GL11.*;
 
 public class RenderConceptual extends Render<EntityConceptual> {
     public RenderConceptual(RenderManager manager) {
         super(manager);
 
     }
-
-
 
 
     @Nullable
@@ -51,6 +40,7 @@ public class RenderConceptual extends Render<EntityConceptual> {
     public static final ResourceLocation EF3_3 = new ResourceLocation("kablade:effects/cnzy/ef3/3.png");
 
     public static final WavefrontObject modelE1 = new WavefrontObject(new ResourceLocationRaw("kablade:effects/cnzy/edg/ed1.obj"));
+    public static final WavefrontObject modelE2 = new WavefrontObject(new ResourceLocationRaw("kablade:effects/cnzy/edg/ed2.obj"));
     public static final ResourceLocation texE1 = new ResourceLocation("kablade:effects/cnzy/edg/1.png");
 
 
@@ -64,7 +54,9 @@ public class RenderConceptual extends Render<EntityConceptual> {
         GL11.glDisable(GL_LIGHTING);
         GL11.glDisable(GL11.GL_CULL_FACE);
         GL11.glEnable(GL_BLEND);//开启混合
+
         Minecraft mc = Minecraft.getMinecraft();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         float time = entity.ticksExisted + partialTicks;
 
@@ -73,17 +65,16 @@ public class RenderConceptual extends Render<EntityConceptual> {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
 
         rendIntro(entity, x, y, z, entityYaw, partialTicks, tessellator, bufferBuilder,mc,time);
+        GL11.glEnable(GL11.GL_CULL_FACE);
 
         rendEdg(entity, x, y, z, entityYaw, partialTicks, tessellator,mc,time);
-
-
 
 
 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastx, lasty);
         OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
         GL11.glEnable(GL_LIGHTING);
-        GL11.glEnable(GL11.GL_CULL_FACE);
+
         GL11.glDisable(GL_BLEND);//开启混合
     }
 

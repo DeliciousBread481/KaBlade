@@ -34,51 +34,6 @@ public class RenderQueue {
 
             RenderDyObj obj = dyObjs.get(j);
 
-
-            Vec3f posOffset = new Vec3f(0,0,0);
-            Vec3f rotateOffset = new Vec3f(0,0,0);
-            Vec3f scaleOffset = new Vec3f(0,0,0);
-            if(obj.nearTranslate!=null){
-                ActionBase action = obj.nearTranslate;
-                if(action.hasTween)
-                {
-                    Vec3f relativeMotion = action.calculateRelativeMotion(objs.get(action.objId).pos);
-                    float relativeTime = 1 - ((action.time - time) / (action.time - obj.prevTimeT));
-                    posOffset = new Vec3f(relativeMotion.x * ActionBase.getEasing(action.tweenType, relativeTime),
-                            relativeMotion.y * ActionBase.getEasing(action.tweenType, relativeTime),
-                            relativeMotion.z * ActionBase.getEasing(action.tweenType, relativeTime));
-                }
-            }
-            if(obj.nearRotate!=null){
-                ActionBase action = obj.nearRotate;
-                if (action.hasTween)
-                {
-                    Vec3f relativeMotion = action.calculateRelativeMotion(objs.get(action.objId).rotate);
-                    float relativeTime = 1 - ((action.time - time) / (action.time - obj.prevTimeR));
-                    rotateOffset = new Vec3f(relativeMotion.x * ActionBase.getEasing(action.tweenType, relativeTime),
-                            relativeMotion.y * ActionBase.getEasing(action.tweenType, relativeTime),
-                            relativeMotion.z * ActionBase.getEasing(action.tweenType, relativeTime));
-                }
-            }
-            if(obj.nearScale!=null){
-                ActionBase action = obj.nearScale;
-                if (action.hasTween)
-                {
-                    Vec3f relativeMotion = action.calculateRelativeMotion(objs.get(action.objId).scale);
-                    float relativeTime =1 - ((action.time - time) / (action.time - obj.prevTimeS));
-                    scaleOffset = new Vec3f(relativeMotion.x * ActionBase.getEasing(action.tweenType, relativeTime),
-                            relativeMotion.y * ActionBase.getEasing(action.tweenType, relativeTime),
-                            relativeMotion.z * ActionBase.getEasing(action.tweenType, relativeTime));
-                }
-            }
-            GlStateManager.translate(x+objs.get(obj.id).pos.x+ posOffset.x,y+objs.get(obj.id).pos.y+ posOffset.y,z+objs.get(obj.id).pos.z+ posOffset.z);
-            GlStateManager.rotate(-yaw,0,1,0);
-            GlStateManager.rotate(objs.get(obj.id).rotate.x+rotateOffset.x,1,0,0);
-            GlStateManager.rotate(objs.get(obj.id).rotate.y+rotateOffset.y,0,1,0);
-            GlStateManager.rotate(objs.get(obj.id).rotate.z+rotateOffset.z,0,0,1);
-            GlStateManager.scale(objs.get(obj.id).scale.x+scaleOffset.x,objs.get(obj.id).scale.y+scaleOffset.y,objs.get(obj.id).scale.z+scaleOffset.z);
-            modelBinding.get(obj.id).doRender();
-
             if(obj.nearTranslate != null){
                 if(obj.nearTranslate.time< time){
                     obj.prevTimeT = obj.nearTranslate.time;
@@ -154,6 +109,55 @@ public class RenderQueue {
                         obj.nearScale = null;
                 }
             }
+
+
+            Vec3f posOffset = new Vec3f(0,0,0);
+            Vec3f rotateOffset = new Vec3f(0,0,0);
+            Vec3f scaleOffset = new Vec3f(0,0,0);
+            if(obj.nearTranslate!=null){
+                ActionBase action = obj.nearTranslate;
+                if(action.hasTween)
+                {
+                    Vec3f relativeMotion = action.calculateRelativeMotion(objs.get(action.objId).pos);
+                    float relativeTime = 1 - ((action.time - time) / (action.time - obj.prevTimeT));
+                    posOffset = new Vec3f(relativeMotion.x * ActionBase.getEasing(action.tweenType, relativeTime),
+                            relativeMotion.y * ActionBase.getEasing(action.tweenType, relativeTime),
+                            relativeMotion.z * ActionBase.getEasing(action.tweenType, relativeTime));
+                }
+            }
+            if(obj.nearRotate!=null){
+                ActionBase action = obj.nearRotate;
+                if (action.hasTween)
+                {
+                    Vec3f relativeMotion = action.calculateRelativeMotion(objs.get(action.objId).rotate);
+                    float relativeTime = 1 - ((action.time - time) / (action.time - obj.prevTimeR));
+                    rotateOffset = new Vec3f(relativeMotion.x * ActionBase.getEasing(action.tweenType, relativeTime),
+                            relativeMotion.y * ActionBase.getEasing(action.tweenType, relativeTime),
+                            relativeMotion.z * ActionBase.getEasing(action.tweenType, relativeTime));
+                }
+            }
+            if(obj.nearScale!=null){
+                ActionBase action = obj.nearScale;
+                if (action.hasTween)
+                {
+                    Vec3f relativeMotion = action.calculateRelativeMotion(objs.get(action.objId).scale);
+                    float relativeTime =1 - ((action.time - time) / (action.time - obj.prevTimeS));
+                    scaleOffset = new Vec3f(relativeMotion.x * ActionBase.getEasing(action.tweenType, relativeTime),
+                            relativeMotion.y * ActionBase.getEasing(action.tweenType, relativeTime),
+                            relativeMotion.z * ActionBase.getEasing(action.tweenType, relativeTime));
+                }
+            }
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(x+objs.get(obj.id).pos.x+ posOffset.x,y+objs.get(obj.id).pos.y+ posOffset.y,z+objs.get(obj.id).pos.z+ posOffset.z);
+            GlStateManager.rotate(-yaw,0,1,0);
+            GlStateManager.rotate(objs.get(obj.id).rotate.x+rotateOffset.x,1,0,0);
+            GlStateManager.rotate(objs.get(obj.id).rotate.y+rotateOffset.y,0,1,0);
+            GlStateManager.rotate(objs.get(obj.id).rotate.z+rotateOffset.z,0,0,1);
+            GlStateManager.scale(objs.get(obj.id).scale.x+scaleOffset.x,objs.get(obj.id).scale.y+scaleOffset.y,objs.get(obj.id).scale.z+scaleOffset.z);
+            modelBinding.get(obj.id).doRender();
+            GlStateManager.popMatrix();
+
+
         }
     }
     public void initialize()
