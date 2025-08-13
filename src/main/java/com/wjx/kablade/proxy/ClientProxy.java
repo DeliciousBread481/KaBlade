@@ -1,6 +1,8 @@
 package com.wjx.kablade.proxy;
 
 import com.wjx.kablade.Entity.Render.Layer.LayerFreeze;
+import com.wjx.kablade.Entity.Render.RenderConfinementForceField;
+import com.wjx.kablade.Entity.Render.RenderWindEnchantment;
 import com.wjx.kablade.SlashBlade.BladeProxy;
 import com.wjx.kablade.util.ParticleManager;
 import com.wjx.kablade.util.handlers.RenderHandler;
@@ -15,6 +17,8 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Map;
 import java.util.Objects;
@@ -63,4 +67,9 @@ public class ClientProxy extends CommonProxy{
         super.init(event);
         ParticleManager.registerParticles();
     }
+
+    @SideOnly(Side.CLIENT)
+    public final static RenderWindEnchantment rendererWE = new RenderWindEnchantment(null);
+    @SideOnly(Side.CLIENT)
+    public final static RenderConfinementForceField rendererCFF = new RenderConfinementForceField(null);
 }

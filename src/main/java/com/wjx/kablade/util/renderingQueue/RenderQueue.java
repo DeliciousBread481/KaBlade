@@ -148,8 +148,11 @@ public class RenderQueue {
                 }
             }
             GlStateManager.pushMatrix();
-            GlStateManager.translate(x+objs.get(obj.id).pos.x+ posOffset.x,y+objs.get(obj.id).pos.y+ posOffset.y,z+objs.get(obj.id).pos.z+ posOffset.z);
-            GlStateManager.rotate(-yaw,0,1,0);
+            float yaa = -yaw;
+            GlStateManager.translate(x,y,z);
+            GlStateManager.rotate(yaa,0,1,0);
+            GlStateManager.translate(objs.get(obj.id).pos.x+ posOffset.x,objs.get(obj.id).pos.y+ posOffset.y,objs.get(obj.id).pos.z+ posOffset.z);
+
             GlStateManager.rotate(objs.get(obj.id).rotate.x+rotateOffset.x,1,0,0);
             GlStateManager.rotate(objs.get(obj.id).rotate.y+rotateOffset.y,0,1,0);
             GlStateManager.rotate(objs.get(obj.id).rotate.z+rotateOffset.z,0,0,1);

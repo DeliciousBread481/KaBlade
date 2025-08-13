@@ -54,7 +54,7 @@ public class VibroCutter {
         SlashBlade.registerCustomItemStack(this.name, customblade);
         BladeLoader.NamedHonkai.add(name);
         ItemStack blackblade = SlashBlade.findItemStack(bladestr, name, 1);
-        ItemStack prevblade = SlashBlade.findItemStack(bladestr, "wjx.blade.honkai.wjx.blade.honkai.byorai", 1);
+        ItemStack prevblade = SlashBlade.findItemStack(bladestr, "wjx.blade.honkai.byorai", 1);
         IRecipe recipe = new SlashBladeRecipeModding(new ResourceLocation(bladestr,"vibro_cutter"),
                 blackblade, prevblade,
                 "AAA",

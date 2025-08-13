@@ -89,7 +89,7 @@ public class RenderConceptual extends Render<EntityConceptual> {
         GlStateManager.rotate(-entityYaw, 0f, 1f, 0f);
 
 
-        GL11.glRotatef(-mc.getRenderManager().playerViewY,0,1,0);
+        GL11.glRotatef(-mc.getRenderManager().playerViewY+entityYaw,0,1,0);
         GL11.glRotatef(mc.getRenderManager().options.thirdPersonView==2?-mc.getRenderManager().playerViewX:mc.getRenderManager().playerViewX,1,0,0);
         //GlStateManager.translate(0, -0.25, 0);
         GlStateManager.scale(10,10,1);
@@ -302,33 +302,7 @@ public class RenderConceptual extends Render<EntityConceptual> {
 
     public void rendEdg(EntityConceptual entity, double x, double y, double z, float entityYaw, float partialTicks, Tessellator tess,Minecraft mc, float time){
 
-        GlStateManager.pushMatrix();
-        /*GlStateManager.translate(x, y+1, z);
-        GlStateManager.rotate(-entityYaw, 0f, 1f, 0f);
-        GlStateManager.scale(1.05f,1.05f,1.05f);
-       // GlStateManager.depthMask(false);
-        mc.getTextureManager().bindTexture(texE1);
-       // GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-        Face.setColor(0xccff66ff);
-
-        modelE1.renderAll();
-        Face.resetColor();*/
-
         entity.queue.doRender(time,x,y,z,entityYaw);
-
-       /* GlStateManager.popMatrix();
-
-
-
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(x, y+1, z);
-        GlStateManager.rotate(-entityYaw, 0f, 1f, 0f);
-        mc.getTextureManager().bindTexture(texE1);
-        modelE1.renderAll();
-       // GlStateManager.depthMask(true);*/
-
-        GlStateManager.popMatrix();
-
 
     }
 }

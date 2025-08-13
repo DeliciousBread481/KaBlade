@@ -10,8 +10,8 @@ import mods.flammpfeil.slashblade.SlashBlade;
 import mods.flammpfeil.slashblade.item.ItemSlashBlade;
 import mods.flammpfeil.slashblade.named.event.LoadEvent;
 import mods.flammpfeil.slashblade.specialeffect.SpecialEffects;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,11 +21,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import static com.wjx.kablade.Main.bladestr;
 
-public class FrozenNaraka {
-    String name = "wjx.blade.honkai.frozen_naraka";
-    String key = "wjx.blade.honkai.frozen_naraka";
+public class KeyOfLimpidity {
+    String name = "wjx.blade.honkai.key_of_limpidity";
+    String key = "wjx.blade.honkai.key_of_limpidity";
 
-    public FrozenNaraka(){
+    public KeyOfLimpidity(){
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -40,19 +40,35 @@ public class FrozenNaraka {
         Item_HonkaiNamed.CurrentItemName.set(tag, name);
         Item_HonkaiNamed.CustomMaxDamage.set(tag, 1200);
 
-        ItemSlashBlade.TextureName.set(tag, "kablade/honkaip2/FrozenNaraka/tex");
-        ItemSlashBlade.ModelName.set(tag, "kablade/honkaip2/FrozenNaraka/mdl");
-        customblade.getTagCompound().setFloat("baseAttackModifier",26.0F);
+        ItemSlashBlade.TextureName.set(tag, "kablade/honkaip2/KeyOfLimpidity/tex");
+        ItemSlashBlade.ModelName.set(tag, "kablade/honkaip2/KeyOfLimpidity/mdl");
+        customblade.getTagCompound().setFloat("baseAttackModifier",29.0F);
         ItemSlashBlade.AttackAmplifier.set(tag,2.5f);
-        ItemSlashBlade.SpecialAttackType.set(tag,459);
-        customblade.addEnchantment(Enchantments.POWER,4);
+        customblade.addEnchantment(Enchantments.SHARPNESS,3);
+        ItemSlashBlade.SpecialAttackType.set(tag,460);
+        ItemSlashBlade.SummonedSwordColor.set(tag,0xFFAAFF);
+        customblade.addEnchantment(Enchantments.POWER,5);
         customblade.addEnchantment(Enchantments.SMITE,4);
         customblade.addEnchantment(Enchantments.SHARPNESS,5);
         Item_HonkaiNamed.IsDefaultBewitched.set(tag, true);
         ItemSlashBladeNamed.NamedBlades.add(this.name);
         ItemSlashBlade.StandbyRenderType.set(tag, 1);
-        SpecialEffects.addEffect(customblade, BladeProxy.GlacialBane);
+        SpecialEffects.addEffect(customblade, BladeProxy.TrueSelf);
         SlashBlade.registerCustomItemStack(this.name, customblade);
         BladeLoader.NamedHonkai.add(name);
+
+        ItemStack blackblade = SlashBlade.findItemStack(bladestr, name, 1);
+        ItemStack prevblade = SlashBlade.findItemStack(bladestr, "wjx.blade.honkai.mag_storm", 1);
+        ItemStack prevblade2 = SlashBlade.findItemStack(bladestr, "wjx.blade.honkai.fairy_sword", 1);
+        IRecipe recipe = new SlashBladeTwoRecipeModding(new ResourceLocation(bladestr,"key_of_limpidity"),
+                blackblade, prevblade,prevblade2,
+                "CCC",
+                "DBD",
+                " A ",
+                'A', prevblade,
+                'B',prevblade2,
+                'C', new ItemStack(ItemInit.ELECTRO_SIGNET),
+                'D',new ItemStack(Items.NETHER_STAR));
+        SlashBlade.addRecipe("key_of_limpidity", recipe);
     }
 }

@@ -9,6 +9,7 @@ import com.wjx.kablade.Entity.Render.RenderRaikiriBlade;
 import com.wjx.kablade.Entity.Render.RenderWindEnchantment;
 import com.wjx.kablade.Lib;
 import com.wjx.kablade.Main;
+import com.wjx.kablade.SlashBlade.BladeProxy;
 import com.wjx.kablade.SlashBlade.blades.bladeitem.MagicBlade;
 import com.wjx.kablade.capability.CapabilityLoader;
 import com.wjx.kablade.capability.CapabilitySlashPotion;
@@ -23,6 +24,7 @@ import com.wjx.kablade.util.interfaces.IKabladeOre;
 import com.wjx.kablade.util.special_render.MagChaosBladeEffectRenderer;
 import mods.flammpfeil.slashblade.SlashBlade;
 import mods.flammpfeil.slashblade.item.ItemSlashBlade;
+import mods.flammpfeil.slashblade.specialeffect.SpecialEffects;
 import mods.flammpfeil.slashblade.util.ResourceLocationRaw;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -88,6 +90,8 @@ import java.util.*;
 import static com.wjx.kablade.Lib.*;
 import static com.wjx.kablade.Main.*;
 import static com.wjx.kablade.SlashBlade.BladeLoader.ITEM_MAGIC;
+import static com.wjx.kablade.proxy.ClientProxy.rendererCFF;
+import static com.wjx.kablade.proxy.ClientProxy.rendererWE;
 
 //@Mod.EventBusSubscriber
 public class WorldEvent {
@@ -910,8 +914,7 @@ public class WorldEvent {
         }
     }
 
-    final static RenderWindEnchantment rendererWE = new RenderWindEnchantment(null);
-    final static RenderConfinementForceField rendererCFF = new RenderConfinementForceField(null);
+
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)

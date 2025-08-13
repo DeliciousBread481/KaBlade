@@ -24,6 +24,10 @@ public class ActionBase {
             case 1: return t * t;
             case 2: return 1 - (1 - t) * (1 - t);
             case 3: return t < 0.5 ? 2*t*t : (float) (1 - Math.pow(-2 * t + 2, 2) / 2);
+            case 4:return t * t * t;
+            case 5:t -= 1; return t * t * t + 1;
+            case 6: return t < 0.5 ? 4 * t * t * t : (float) (Math.pow(t - 1, 3) * (2 * t - 2) * (2 * t - 2) + 1);
+            case 7 :return (float) (-(Math.cos(Math.PI * t) - 1) / 2);
             default: return t;
         }
     }
