@@ -44,9 +44,19 @@ public class EntityFlareEdge extends ExSaEntityDrive{
         }
         if (curEntity instanceof EntityEnderman) {
             ((EntityEnderman) curEntity).setAttackTarget(null);
-            Field f =  EntityEnderman.class.getDeclaredField("SCREAMING");
-            f.setAccessible(true);
-            curEntity.getDataManager().set((DataParameter<Boolean>)f.get(null),false);
+            Field[] fields = EntityEnderman.class.getDeclaredFields();
+            for (Field field : fields) {
+                if (field.getName().equals("SCREAMING")) {
+                    field.setAccessible(true);
+                    curEntity.getDataManager().set((DataParameter<Boolean>)field.get(null),false);
+                    break;
+                }
+                if (field.getName().equals("field_184719_bw")){
+                    field.setAccessible(true);
+                    curEntity.getDataManager().set((DataParameter<Boolean>)field.get(null),false);
+                    break;
+                }
+            }
         }
     }
 }
