@@ -46,7 +46,6 @@ public class MagStorm {
         ItemSlashBlade.ModelName.set(tag, "kablade/Honkai/MagStorm/mdlMagStorm");
         customblade.getTagCompound().setFloat("baseAttackModifier",23.0F);
         ItemSlashBlade.AttackAmplifier.set(tag,2.5f);
-        customblade.addEnchantment(Enchantments.SHARPNESS,3);
         ItemSlashBlade.SpecialAttackType.set(tag,298);
         ItemSlashBlade.SummonedSwordColor.set(tag,65535);
         customblade.addEnchantment(Enchantments.POWER,3);

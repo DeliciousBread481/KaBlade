@@ -44,7 +44,6 @@ public class KeyOfLimpidity {
         ItemSlashBlade.ModelName.set(tag, "kablade/honkaip2/KeyOfLimpidity/mdl");
         customblade.getTagCompound().setFloat("baseAttackModifier",29.0F);
         ItemSlashBlade.AttackAmplifier.set(tag,2.5f);
-        customblade.addEnchantment(Enchantments.SHARPNESS,3);
         ItemSlashBlade.SpecialAttackType.set(tag,460);
         ItemSlashBlade.SummonedSwordColor.set(tag,0xFFAAFF);
         customblade.addEnchantment(Enchantments.POWER,5);

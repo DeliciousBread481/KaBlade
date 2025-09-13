@@ -44,7 +44,6 @@ public class KeyOfCastigation {
         ItemSlashBlade.ModelName.set(tag, "kablade/Honkai/KeyOfCastigation/mdlKeyOfCastigation");
         customblade.getTagCompound().setFloat("baseAttackModifier",25.0F);
         ItemSlashBlade.AttackAmplifier.set(tag,2.5f);
-        customblade.addEnchantment(Enchantments.SHARPNESS,4);
         if (ModConfig.GeneralConf.Enable_New_SA_Id){
             ItemSlashBlade.SpecialAttackType.set(tag, 454);
         }
@@ -54,7 +53,7 @@ public class KeyOfCastigation {
         ItemSlashBlade.SummonedSwordColor.set(tag,10158335);
         customblade.addEnchantment(Enchantments.POWER,3);
         customblade.addEnchantment(Enchantments.SMITE,4);
-        customblade.addEnchantment(Enchantments.SHARPNESS,4);
+        customblade.addEnchantment(Enchantments.SHARPNESS,5);
         Item_HonkaiNamed.IsDefaultBewitched.set(tag, true);
         ItemSlashBladeNamed.NamedBlades.add(this.name);
         ItemSlashBlade.StandbyRenderType.set(tag, 1);
