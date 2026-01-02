@@ -23,8 +23,6 @@ import javax.annotation.Nonnull;
 
 import java.util.List;
 
-import static com.wjx.kablade.Entity.Render.RenderConceptual.*;
-
 public class EntityConceptual extends Entity implements IThrowableEntity {
     public RenderQueue queue;
     public EntityConceptual(World world) {
